@@ -1,13 +1,27 @@
-import './App.css'
-import CardProduct from './components/cardProduct'
+import './App.css';
+import CardProduct from './components/cardProduct.jsx';
+import { useState } from 'react';
+import db from './database/productos'; 
 
 function App() {
+  const [products, setProducts] = useState(db);
 
   return (
     <>
-      <CardProduct id={1}  name="Product 1" price={10.99} image={"https://imagedelivery.net/4fYuQyy-r8_rpBpcY7lH_A/sodimacCL/418274X_00/w=1500,h=1500,fit=pad"}/>
+      <div className='flex flex-row items-start justify-start gap-10'>
+        {products.map((product) => (
+          <CardProduct
+            key={product.id} 
+            name={product.name}
+            price={product.price}
+            image={product.image}
+          />
+        ))}
+      </div>
+      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
